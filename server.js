@@ -1,13 +1,21 @@
 const express = require('express')
+const dotenv = require('dotenv')
 
-require('dotenv').config()
+dotenv.config()
 const host = process.env.HOST 
 const port = process.env.PORT
 
+const routes = require('./routes')
 const app = express()
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
+
+app.use(routes)
+app.set('view engine','ejs')
+const layputs = require('express-ejs-')
+
+
 const default_login_name = process.env.LOGIN_NAME
 const default_password = process.env.PASSWORD
 
